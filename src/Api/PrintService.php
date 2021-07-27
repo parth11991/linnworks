@@ -4,7 +4,7 @@ namespace Onfuro\Linnworks\Api;
 
 class PrintService extends ApiClient
 {
-    public function CreatePDFfromJobForceTemplate(string $templateType = 'Shipping Labels', array $IDs = [], int $templateID = 17,string $parameters = '', string $printerName = "", string $printZoneCode = "", int $pageStartNumber = 0, string $operationId = "", string $context = "")
+    public function CreatePDFfromJobForceTemplate(string $templateType = 'Shipping Labels', array $IDs = [], int $templateID = 0,string $parameters = '', string $printerName = "", string $printZoneCode = "", int $pageStartNumber = 0, string $operationId = "", string $context = "")
     {
         return $this->get('PrintService/CreatePDFfromJobForceTemplate', [
             "templateType" => $templateType,
@@ -23,4 +23,11 @@ class PrintService extends ApiClient
     {
         return $this->post('PrintService/VP_GetPrinters', []);
     }
+
+    public function GetTemplateList()
+    {
+        return $this->post('PrintService/GetTemplateList', []);
+    }
+
+    
 }

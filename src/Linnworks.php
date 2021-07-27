@@ -9,6 +9,7 @@ use Onfuro\Linnworks\Api\PostalServices;
 use Onfuro\Linnworks\Api\ReturnsRefunds;
 use Onfuro\Linnworks\Api\Stock;
 use Onfuro\Linnworks\Api\PrintService;
+use Onfuro\Linnworks\Api\PrintZone;
 use Onfuro\Linnworks\Exceptions\LinnworksAuthenticationException;
 use GuzzleHttp\Client as GuzzleClient;
 
@@ -100,6 +101,9 @@ class Linnworks
         return new PrintService($this->client, $this->server, $this->bearer);
     }
 
-    
+    public function printZone(): PrintZone
+    {
+        return new PrintZone($this->client, $this->server, $this->bearer);
+    }
 
 }
