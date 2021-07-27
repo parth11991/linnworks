@@ -1,0 +1,39 @@
+{
+    "name": "onfuro/linnworks",
+    "description": "Linnworks API wrapper",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Onfuro",
+            "email": "adam@profilestudio.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Onfuro\\Linnworks\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Onfuro\\Linnworks\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Onfuro\\Linnworks\\LinnworksServiceProvider"
+            ],
+            "aliases": {
+                "Linnworks": "Onfuro\\Linnworks\\LinnworksFacade"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
