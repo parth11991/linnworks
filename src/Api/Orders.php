@@ -5,7 +5,7 @@ namespace Onfuro\Linnworks\Api;
 class Orders extends ApiClient
 {
 
-    public function getOpenOrders(string $fulfilmentCenter = '00000000-0000-0000-0000-000000000000', int $entriesPerPage = 25, int $pageNumber = 1, string $filters = "", array $sorting = [], string $additionalFilters = "")
+    public function getOpenOrders(string $fulfilmentCenter = '00000000-0000-0000-0000-000000000000', int $entriesPerPage = 25, int $pageNumber = 1, string $filters = "", string $sorting = "[]", string $additionalFilters = "")
     {
         return $this->get('Orders/GetOpenOrders', [
             "entriesPerPage" => $entriesPerPage,
@@ -17,13 +17,14 @@ class Orders extends ApiClient
         ]);
     }
 
-    public function getAllOpenOrders($fulfilmentCenter, string $filters = "", array $sorting = [], string $additionalFilter = "")
+    public function getAllOpenOrders($fulfilmentCenter = '00000000-0000-0000-0000-000000000000', string $filters = "", string $sorting = "[]", string $additionalFilter = "")
     {
-        return $this->get('Orders/GetAllOpenOrders', [
+        return $this->post('Orders/GetAllOpenOrders', [
             "filters" => $filters,
             "sorting" => $sorting,
             "fulfilmentCenter" => $fulfilmentCenter,
-            "additionalFilter" => $additionalFilter
+            "additionalFilter" => $additionalFilter,
+            "exactMatch" => true
         ]);
     }
 
