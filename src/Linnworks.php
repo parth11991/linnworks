@@ -11,6 +11,7 @@ use Onfuro\Linnworks\Api\Stock;
 use Onfuro\Linnworks\Api\PrintService;
 use Onfuro\Linnworks\Api\PrintZone;
 use Onfuro\Linnworks\Api\Picking;
+use Onfuro\Linnworks\Api\ShippingService;
 use Onfuro\Linnworks\Exceptions\LinnworksAuthenticationException;
 use GuzzleHttp\Client as GuzzleClient;
 
@@ -111,5 +112,12 @@ class Linnworks
     {
         return new Picking($this->client, $this->server, $this->bearer);
     }
+
+    public function shippingService(): ShippingService
+    {
+        return new ShippingService($this->client, $this->server, $this->bearer);
+    }
+
+    
 
 }
