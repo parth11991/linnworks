@@ -19,6 +19,15 @@ class PrintService extends ApiClient
         ]);
     }
 
+    public function CreateReturnShippingLabelsPDF(array $IDs = [], array $orderItemIdsAndQuantities = [],string $returnPostalServiceName = '')
+    {
+        return $this->get('PrintService/CreateReturnShippingLabelsPDF', [
+            "IDs" => json_encode($IDs),
+            "orderItemIdsAndQuantities" => $orderItemIdsAndQuantities,
+            "returnPostalServiceName" => $returnPostalServiceName,
+        ]);
+    }
+
     public function VP_GetPrinters()
     {
         return $this->post('PrintService/VP_GetPrinters', []);
