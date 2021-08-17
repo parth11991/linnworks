@@ -64,6 +64,7 @@ class Linnworks
         $response = (new Auth($this->client, self::BASE_URI.'/api/', null))
             ->AuthorizeByApplication($parameters);
 
+
         if(! ($response['Token'] ?? null)){
             throw new LinnworksAuthenticationException($response['message'] ?? '');
         }
@@ -117,7 +118,4 @@ class Linnworks
     {
         return new ShippingService($this->client, $this->server, $this->bearer);
     }
-
-    
-
 }
