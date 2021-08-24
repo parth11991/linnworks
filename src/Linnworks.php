@@ -12,6 +12,7 @@ use Onfuro\Linnworks\Api\PrintService;
 use Onfuro\Linnworks\Api\PrintZone;
 use Onfuro\Linnworks\Api\Picking;
 use Onfuro\Linnworks\Api\ShippingService;
+use Onfuro\Linnworks\Api\Permissions;
 use Onfuro\Linnworks\Exceptions\LinnworksAuthenticationException;
 use GuzzleHttp\Client as GuzzleClient;
 
@@ -30,6 +31,9 @@ class Linnworks
 
     /** @var string */
     protected $server;
+
+    /** @var string */
+    protected $response;
 
     public function __construct(array $config, GuzzleClient $client = null)
     {
@@ -64,7 +68,6 @@ class Linnworks
         $response = (new Auth($this->client, self::BASE_URI.'/api/', null))
             ->AuthorizeByApplication($parameters);
 
-
         if(! ($response['Token'] ?? null)){
             throw new LinnworksAuthenticationException($response['message'] ?? '');
         }
@@ -72,6 +75,18 @@ class Linnworks
         $this->bearer = $response['Token'];
 
         $this->server = $response['Server'] .'/api/';
+
+        $this->response = $response;
+    }
+
+    public function response()
+    {
+        return $this->response;
+    }
+
+    public function auth(): Auth
+    {
+        return new Auth($this->client, $this->server, $this->bearer);
     }
 
     public function orders(): Orders
@@ -118,4 +133,10 @@ class Linnworks
     {
         return new ShippingService($this->client, $this->server, $this->bearer);
     }
+
+    public function permissions(): Permissions
+    {
+        return new Permissions($this->client, $this->server, $this->bearer);
+    }
+    
 }
