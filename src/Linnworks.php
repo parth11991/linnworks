@@ -138,5 +138,10 @@ class Linnworks
     {
         return new Permissions($this->client, $this->server, $this->bearer);
     }
+
+    public function inventory(): Inventory
+    {
+        return new Inventory($this->client, $this->server, $this->bearer);
+    }
     
 }
