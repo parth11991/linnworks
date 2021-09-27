@@ -51,6 +51,20 @@ class ApiClient
         });
     }
 
+    public function post_int($url = null, array $parameters = []): int
+    {
+        return $this->parse(function() use($url, $parameters){
+            return $this->client->post($this->server.$url, [
+                'form_params' => $parameters,
+                'headers' => [
+                    'Content-Type' => 'application/x-www-form-urlencoded',
+                    'Accept' => 'application/json',
+                    'Authorization' => $this->bearer ?? ''
+                ]
+            ]);
+        });
+    }
+    
     private function parse(callable $callback)
     {
         $response = call_user_func($callback);

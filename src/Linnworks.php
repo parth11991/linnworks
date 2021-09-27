@@ -13,6 +13,7 @@ use Onfuro\Linnworks\Api\PrintZone;
 use Onfuro\Linnworks\Api\Picking;
 use Onfuro\Linnworks\Api\ShippingService;
 use Onfuro\Linnworks\Api\Permissions;
+use Onfuro\Linnworks\Api\Inventory;
 use Onfuro\Linnworks\Exceptions\LinnworksAuthenticationException;
 use GuzzleHttp\Client as GuzzleClient;
 
