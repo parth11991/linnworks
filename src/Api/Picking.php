@@ -56,5 +56,11 @@ class Picking extends ApiClient
         ]);
     }    
     
+    public function UpdatePickedItemDelta(string $Deltas = null)
+    {
+        return $this->post('Picking/UpdatePickedItemDelta', [
+            "Deltas" => $Deltas
+        ]);
+    }
     
 }

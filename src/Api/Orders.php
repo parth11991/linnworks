@@ -17,7 +17,7 @@ class Orders extends ApiClient
         ]);
     }
 
-    public function getAllOpenOrders($fulfilmentCenter = '00000000-0000-0000-0000-000000000000', string $filters = "", string $sorting = "[]", string $additionalFilter = "")
+    public function getAllOpenOrders(string $fulfilmentCenter = '00000000-0000-0000-0000-000000000000', string $filters = "", string $sorting = "[]", string $additionalFilter = "")
     {
         return $this->post('Orders/GetAllOpenOrders', [
             "filters" => $filters,

@@ -22,9 +22,25 @@ class Inventory extends ApiClient
         ]);
     }
 
+    public function GetStockItemIdsBySKU(string $SKUS = '{"SKUS":""}')
+    {
+        return $this->post('Inventory/GetStockItemIdsBySKU', [
+            "request" => $SKUS
+        ]);
+    }
+
+    
+
     public function GetInventoryItemImages(string $inventoryItemId = "")
     {
         return $this->post('Inventory/GetInventoryItemImages', [
+            "inventoryItemId" => $inventoryItemId
+        ]);
+    }
+
+    public function GetInventoryItemCompositions(string $inventoryItemId = "")
+    {
+        return $this->post('Inventory/GetInventoryItemCompositions', [
             "inventoryItemId" => $inventoryItemId
         ]);
     }
