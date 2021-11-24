@@ -11,13 +11,24 @@ Wrapper for the Linnworks API, as documented at [http://apps.linnworks.net/Api](
 ## Usage
         
     $linnworks = Linnworks::make('applicationId', 'applicationSecret', 'token');
+    $linnworks = Linnworks_API::make([
+                                        'applicationId' => env('LINNWORKS_APP_ID'),
+                                        'applicationSecret' => env('LINNWORKS_SECRET'),
+                                        'token' => auth()->user()->linnworks_token()->token,
+                                    ], $this->client);
+    $filter = "";
+    $sorting = "[]"
+    $additionalFilter = "";
+    $entriesPerPage = 25;
+    $pageNumber = 1;
     $orders = $linnworks->Orders()->getOpenOrders(
-        25,
-        1,
-        null,
-        null,
-        'e41b4701-0885-430d-9623-d840d9d46dd6',
-        null);
+                                                    'e41b4701-0885-430d-9623-d840d9d46dd6',
+                                                    $entriesPerPage,
+                                                    $pageNumber,
+                                                    $filter,
+                                                    $sorting,
+                                                    $additionalFilter
+                                                );
         
 ## Depriciated SDK
 
