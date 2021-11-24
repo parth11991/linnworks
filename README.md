@@ -10,7 +10,6 @@ Wrapper for the Linnworks API, as documented at [http://apps.linnworks.net/Api](
 
 ## Usage
         
-    $linnworks = Linnworks::make('applicationId', 'applicationSecret', 'token');
     $linnworks = Linnworks_API::make([
                                         'applicationId' => env('LINNWORKS_APP_ID'),
                                         'applicationSecret' => env('LINNWORKS_SECRET'),
