@@ -104,6 +104,14 @@ class Orders extends ApiClient
         ]);
     }
 
+    public function SetOrderCustomerInfo(string $orderId = "", array $info = [])
+    {
+        return $this->post('Orders/SetOrderCustomerInfo',[
+            'orderId' => $orderId,
+            'info' => json_encode($info)
+        ]);
+    }
+
     public function processOrder(string $orderId = "", bool $scanPerformed = true, string $locationId = "", bool $allowZeroAndNegativeBatchQty = true)
     {
         return $this->post('Orders/ProcessOrder',[
