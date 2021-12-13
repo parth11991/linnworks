@@ -12,4 +12,11 @@ class Locations extends ApiClient
         return $this->get('Inventory/GetCountries');
     }
 
+    public function GetWarehouseTOTEs(string $LocationId = '{"LocationId":""}')
+    {
+        return $this->get('Inventory/GetWarehouseTOTEs', [
+            "request" => $LocationId
+        ]);
+    }
+
 }
