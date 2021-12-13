@@ -14,7 +14,7 @@ class Locations extends ApiClient
 
     public function GetWarehouseTOTEs(string $LocationId = '{"LocationId":""}')
     {
-        return $this->get('Inventory/GetWarehouseTOTEs', [
+        return $this->post('Locations/GetWarehouseTOTEs', [
             "request" => $LocationId
         ]);
     }
