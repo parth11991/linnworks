@@ -18,11 +18,8 @@ class PrintZone extends ApiClient
 
     public function UpdateTemplateOverrides(array $ToUpdate = [])
     {
-        /*dd([
-            "ToUpdate" => [json_encode($ToUpdate)]
-        ]);*/
         return $this->post('PrintZone/UpdateTemplateOverrides', [
-            "ToUpdate" => [json_encode($ToUpdate)]
+            "request" => json_encode($ToUpdate)
         ]);
     }
 }
