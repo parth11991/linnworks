@@ -62,5 +62,15 @@ class Picking extends ApiClient
             "request" => $Deltas
         ]);
     }
+
+    public function UpdatePickingWaveHeader(int $PickingWaveId = 0,int $UserId = 0)
+    {
+        return $this->post('Picking/UpdatePickingWaveHeader', [
+            "PickingWaveId" => $PickingWaveId,
+            "UserId" => $UserId,
+            "State" => 1
+        ]);
+    }  
+    
     
 }
