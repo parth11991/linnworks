@@ -72,5 +72,12 @@ class Picking extends ApiClient
         ]);
     }  
     
+
+    public function DeleteOrdersFromPickingWaves(string $Orders = null)
+    {
+        return $this->post('Picking/DeleteOrdersFromPickingWaves', [
+            "request" => $Orders
+        ]);
+    }
     
 }
