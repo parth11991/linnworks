@@ -104,6 +104,19 @@ class Orders extends ApiClient
         ]);
     }
 
+    public function SetOrderCustomerInfo(string $orderId = "", array $info = [])
+    {
+        /*dd([
+            'orderId' => $orderId,
+            'info' => json_encode($info)
+        ]);*/
+        return $this->post('Orders/SetOrderCustomerInfo',[
+            'orderId' => $orderId,
+            'info' => json_encode($info),
+            'saveToCrm' => true
+        ]);
+    } 
+
     public function processOrder(string $orderId = "", bool $scanPerformed = true, string $locationId = "", bool $allowZeroAndNegativeBatchQty = true)
     {
         return $this->post('Orders/ProcessOrder',[
@@ -250,7 +263,7 @@ class Orders extends ApiClient
         return $this->post('Orders/GetAvailableFolders',[]);
     }
 
-    
+       
 
 //    public function setGeneralInfo(
 //        $guid
