@@ -47,4 +47,21 @@ class Stock extends ApiClient
         ]);
     }
 
+    public function getStockItemsFullByIds(array $stockItemIds = []) {
+        return $this->post('Stock/GetStockItemsFullByIds', [
+            "request" => json_encode([
+                'StockItemIds' => $stockItemIds,
+                'DataRequirements' => [
+                    'StockLevels',
+                    'Supplier',
+                    'ChannelTitle',
+                    'ChannelDescription',
+                    'ChannelPrice',
+                    'ExtendedProperties',
+                    'Images'
+                ]
+            ]),
+        ]);
+    }
+
 }
