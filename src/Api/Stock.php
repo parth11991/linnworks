@@ -64,4 +64,11 @@ class Stock extends ApiClient
         ]);
     }
 
+    public function GetStockLevel(string $stockItemId)
+    {
+        return $this->get('Stock/GetStockLevel', [
+            "stockItemId" => $stockItemId
+        ]);
+    }
+
 }
