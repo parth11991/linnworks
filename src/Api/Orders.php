@@ -24,7 +24,7 @@ class Orders extends ApiClient
             "sorting" => $sorting,
             "fulfilmentCenter" => $fulfilmentCenter,
             "additionalFilter" => $additionalFilter,
-            "exactMatch" => true
+            // "exactMatch" => true
         ]);
     }
 
@@ -40,6 +40,22 @@ class Orders extends ApiClient
         return $this->get('Orders/GetOrderDetailsByNumOrderId', [
             "OrderId" => $numOrderId
         ]);
+    }
+
+    public function SearchProcessedOrders(int $pageNum = 1, int $numEntriesPerPage = 50, string $from = "-7200 days", string $to = "now", string $dateType = "processed", string $exactMatch = "false", string $searchTerm = "")
+    {
+        $request = [
+            "FromDate" => date('Y-m-d\TH:i:sP', strtotime($from)),
+            "ToDate" => date('Y-m-d\TH:i:sP', strtotime($to)),
+            "DateField" => $dateType,
+            "exactMatch" => $exactMatch,
+            "searchTerm" => $searchTerm,
+            "PageNumber" => $pageNum,
+            "ResultsPerPage" => $numEntriesPerPage,
+        ];
+        return $this->post('ProcessedOrders/SearchProcessedOrders', 
+            ['Request' => json_encode($request)]
+        );
     }
 
     public function SearchProcessedOrdersPaged(int $pageNum = 1, int $numEntriesPerPage = 50, string $from = "-7200 days", string $to = "now", string $dateType = "PROCESSED", string $searchField = "", string $exactMatch = "false", string $searchTerm = "")
@@ -103,19 +119,6 @@ class Orders extends ApiClient
             'info' => json_encode($info)
         ]);
     }
-
-    public function SetOrderCustomerInfo(string $orderId = "", array $info = [])
-    {
-        /*dd([
-            'orderId' => $orderId,
-            'info' => json_encode($info)
-        ]);*/
-        return $this->post('Orders/SetOrderCustomerInfo',[
-            'orderId' => $orderId,
-            'info' => json_encode($info),
-            'saveToCrm' => true
-        ]);
-    } 
 
     public function processOrder(string $orderId = "", bool $scanPerformed = true, string $locationId = "", bool $allowZeroAndNegativeBatchQty = true)
     {
@@ -263,7 +266,7 @@ class Orders extends ApiClient
         return $this->post('Orders/GetAvailableFolders',[]);
     }
 
-       
+    
 
 //    public function setGeneralInfo(
 //        $guid

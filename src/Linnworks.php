@@ -4,6 +4,7 @@ namespace Onfuro\Linnworks;
 
 use Onfuro\Linnworks\Api\Auth;
 use Onfuro\Linnworks\Api\Locations;
+use Onfuro\Linnworks\Api\OpenOrders;
 use Onfuro\Linnworks\Api\Orders;
 use Onfuro\Linnworks\Api\PostalServices;
 use Onfuro\Linnworks\Api\ReturnsRefunds;
@@ -14,6 +15,8 @@ use Onfuro\Linnworks\Api\Picking;
 use Onfuro\Linnworks\Api\ShippingService;
 use Onfuro\Linnworks\Api\Permissions;
 use Onfuro\Linnworks\Api\Inventory;
+use Onfuro\Linnworks\Api\Listings;
+use Onfuro\Linnworks\Api\Dashboards;
 use Onfuro\Linnworks\Exceptions\LinnworksAuthenticationException;
 use GuzzleHttp\Client as GuzzleClient;
 
@@ -54,7 +57,7 @@ class Linnworks
     private function makeClient(): GuzzleClient
     {
         return new GuzzleClient([
-            'timeout' => $this->config['timeout'] ?? 15
+            'timeout' => $this->config['timeout'] ?? 0
         ]);
     }
 
@@ -88,6 +91,11 @@ class Linnworks
     public function auth(): Auth
     {
         return new Auth($this->client, $this->server, $this->bearer);
+    }
+
+    public function openOrders(): OpenOrders
+    {
+        return new OpenOrders($this->client, $this->server, $this->bearer);
     }
 
     public function orders(): Orders
@@ -143,6 +151,16 @@ class Linnworks
     public function inventory(): Inventory
     {
         return new Inventory($this->client, $this->server, $this->bearer);
+    }
+
+    public function Listings(): Listings
+    {
+        return new Listings($this->client, $this->server, $this->bearer);
+    }
+
+    public function Dashboards(): Dashboards
+    {
+        return new Dashboards($this->client, $this->server, $this->bearer);
     }
     
 }

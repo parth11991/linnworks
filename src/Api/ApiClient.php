@@ -24,6 +24,14 @@ class ApiClient
         $this->bearer = $bearer;
     }
 
+    public function apiClientVariables(){
+        return [
+            'client' => $this->client,
+            'server' => $this->server,
+            'bearer' => $this->bearer
+        ];
+    }
+
     public function get($url = null, array $parameters = []): array
     {
         return $this->parse(function() use($url, $parameters){

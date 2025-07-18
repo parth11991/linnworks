@@ -47,27 +47,35 @@ class Stock extends ApiClient
         ]);
     }
 
-    public function getStockItemsFullByIds(array $stockItemIds = []) {
-        return $this->post('Stock/GetStockItemsFullByIds', [
+    public function getStockItemsByIds(array $ids = [])
+    {
+        return $this->post('Stock/GetStockItemsByIds', [
             "request" => json_encode([
-                'StockItemIds' => $stockItemIds,
-                'DataRequirements' => [
-                    'StockLevels',
-                    'Supplier',
-                    'ChannelTitle',
-                    'ChannelDescription',
-                    'ChannelPrice',
-                    'ExtendedProperties',
-                    'Images'
-                ]
+                "StockItemIds" => $ids
             ]),
         ]);
     }
 
-    public function GetStockLevel(string $stockItemId)
+
+    public function GetStockItemsFull(string $keyWord = "",bool $loadCompositeParents = true, bool $loadVariationParents = true,int $entriesPerPage = 100, int $pageNumber = 1, string $dataRequirements = '[0,1,2,3,4,5,6,7,8,9]', string $searchTypes = '[]')
     {
-        return $this->get('Stock/GetStockLevel', [
-            "stockItemId" => $stockItemId
+        return $this->get('Stock/GetStockItemsFull', [
+            "keyWord" => $keyWord,
+            "loadCompositeParents" => $loadCompositeParents,
+            "loadVariationParents" => $loadVariationParents,
+            "entriesPerPage" => $entriesPerPage,
+            "pageNumber" => $pageNumber,
+            "dataRequirements" => $dataRequirements,
+            "searchTypes" => $searchTypes,
+        ]);
+    }
+
+    public function getStockItemsFullByIds(array $ids = [])
+    {
+        return $this->post('Stock/GetStockItemsFullByIds', [
+            "request" => json_encode([
+                "StockItemIds" => $ids
+            ]),
         ]);
     }
 
