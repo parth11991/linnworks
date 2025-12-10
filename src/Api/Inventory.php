@@ -29,12 +29,22 @@ class Inventory extends ApiClient
         ]);
     }
 
-    
+
 
     public function GetInventoryItemImages(string $inventoryItemId = "")
     {
         return $this->post('Inventory/GetInventoryItemImages', [
             "inventoryItemId" => $inventoryItemId
+        ]);
+    }
+
+    public function GetImagesInBulk(array $stockItemIds = [], array $skus = [])
+    {
+        return $this->post('Inventory/GetImagesInBulk', [
+            "request" => [
+                "StockItemIds" => $stockItemIds,
+                "SKUS" => $skus
+            ]
         ]);
     }
 
@@ -53,7 +63,7 @@ class Inventory extends ApiClient
     public function GetPreDefinedViews()
     {
         return $this->post('Inventory/GetPreDefinedViews', []);
-    } 
+    }
 
     public function GetInventoryItemsCount(bool $includeDeleted = true, bool $includeArchived = true)
     {
@@ -63,7 +73,7 @@ class Inventory extends ApiClient
         ]);
     }
 
-    public function GetInventoryItemExtendedProperties(string $inventoryItemId = "",array $propertyParams = [])
+    public function GetInventoryItemExtendedProperties(string $inventoryItemId = "", array $propertyParams = [])
     {
         return $this->post('Inventory/GetInventoryItemExtendedProperties', [
             "inventoryItemId" => $inventoryItemId,
@@ -80,26 +90,31 @@ class Inventory extends ApiClient
     {
         return $this->post('Inventory/GetChannels');
     }
-    
-    public function GetInventoryItemPriceChannelSuffixes(){
+
+    public function GetInventoryItemPriceChannelSuffixes()
+    {
         return $this->post('Inventory/GetInventoryItemPriceChannelSuffixes');
     }
 
-    public function GetInventoryItemPriceTags(){
+    public function GetInventoryItemPriceTags()
+    {
         return $this->post('Inventory/GetInventoryItemPriceTags');
     }
 
-    public function GetCategories(){
+    public function GetCategories()
+    {
         return $this->post('Inventory/GetCategories');
     }
 
-    public function BatchGetInventoryItemChannelSKUs(array $inventoryItemIds = []){
+    public function BatchGetInventoryItemChannelSKUs(array $inventoryItemIds = [])
+    {
         return $this->post('Inventory/BatchGetInventoryItemChannelSKUs', [
             "inventoryItemIds" => json_encode($inventoryItemIds)
         ]);
     }
 
-    public function UpdateInventoryItemPrices(array $arr){
+    public function UpdateInventoryItemPrices(array $arr)
+    {
         // $arr = [json_encode([
         //     "Source" => $source,
         //     "SubSource" => $subSource,
@@ -125,19 +140,19 @@ class Inventory extends ApiClient
             CURLOPT_URL => 'https://eu-ext.linnworks.net/api/Inventory/UpdateInventoryItemPrices',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_POSTFIELDS => 'inventoryItemPrices='.json_encode([$arr]),
+            CURLOPT_POSTFIELDS => 'inventoryItemPrices=' . json_encode([$arr]),
             CURLOPT_HTTPHEADER => array(
-                'Authorization: '.$acv['bearer'],
+                'Authorization: ' . $acv['bearer'],
                 'Content-Type: application/x-www-form-urlencoded'
             ),
         ));
 
         $response = curl_exec($curl);
-        
+
         curl_close($curl);
         return $response;
         // print_r($response);exit;
-            
+
 
         // print_r(json_encode([$arr]));
         // return $this->get('Inventory/UpdateInventoryItemPrices',[
@@ -146,7 +161,8 @@ class Inventory extends ApiClient
         // $this->get('Inventory/UpdateInventoryItemPrices',["inventoryItemPrices" => json_encode([$arr])]);
     }
 
-    public function GetInventoryItemPrices($inventoryItemId){
+    public function GetInventoryItemPrices($inventoryItemId)
+    {
         return $this->post('Inventory/GetInventoryItemPrices', [
             "inventoryItemId" => $inventoryItemId
         ]);
