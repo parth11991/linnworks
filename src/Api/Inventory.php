@@ -40,11 +40,13 @@ class Inventory extends ApiClient
 
     public function GetImagesInBulk(array $stockItemIds = [], array $skus = [])
     {
+        $payload = [
+            "StockItemIds" => $stockItemIds,
+            "SKUS" => $skus
+        ];
+
         return $this->post('Inventory/GetImagesInBulk', [
-            "request" => [
-                "StockItemIds" => $stockItemIds,
-                "SKUS" => $skus
-            ]
+            "request" => json_encode($payload)
         ]);
     }
 
