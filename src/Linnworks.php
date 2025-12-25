@@ -37,6 +37,9 @@ class Linnworks
     protected $server;
 
     /** @var string */
+    protected $serverV2;
+
+    /** @var string */
     protected $response;
 
     public function __construct(array $config, GuzzleClient $client = null)
@@ -44,14 +47,14 @@ class Linnworks
         $this->client = $client ?: $this->makeClient();
         $this->config = $config;
 
-        if(! $this->bearer){
+        if (! $this->bearer) {
             $this->refreshToken();
         }
     }
 
     public static function make(array $config, GuzzleClient $client = null): self
     {
-        return new static ($config, $client);
+        return new static($config, $client);
     }
 
     private function makeClient(): GuzzleClient
@@ -61,7 +64,7 @@ class Linnworks
         ]);
     }
 
-    private function refreshToken() : void
+    private function refreshToken(): void
     {
         $parameters = [
             "ApplicationId" => $this->config['applicationId'],
@@ -69,16 +72,18 @@ class Linnworks
             "Token" => $this->config['token']
         ];
 
-        $response = (new Auth($this->client, self::BASE_URI.'/api/', null))
+        $response = (new Auth($this->client, self::BASE_URI . '/api/', null))
             ->AuthorizeByApplication($parameters);
 
-        if(! ($response['Token'] ?? null)){
+        if (! ($response['Token'] ?? null)) {
             throw new LinnworksAuthenticationException($response['message'] ?? '');
         }
 
         $this->bearer = $response['Token'];
 
-        $this->server = $response['Server'] .'/api/';
+        $this->server = $response['Server'] . '/api/';
+
+        $this->serverV2 = $response['ServerVersion2'];
 
         $this->response = $response;
     }
@@ -101,6 +106,11 @@ class Linnworks
     public function orders(): Orders
     {
         return new Orders($this->client, $this->server, $this->bearer);
+    }
+
+    public function ordersV2(): OrdersV2
+    {
+        return new OrdersV2($this->client, $this->serverV2, $this->bearer);
     }
 
     public function locations(): Locations
@@ -162,5 +172,4 @@ class Linnworks
     {
         return new Dashboards($this->client, $this->server, $this->bearer);
     }
-    
 }
