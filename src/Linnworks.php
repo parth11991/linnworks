@@ -19,6 +19,7 @@ use Onfuro\Linnworks\Api\Listings;
 use Onfuro\Linnworks\Api\Dashboards;
 use Onfuro\Linnworks\Exceptions\LinnworksAuthenticationException;
 use GuzzleHttp\Client as GuzzleClient;
+use Onfuro\Linnworks\Api\OrdersV2;
 
 class Linnworks
 {
