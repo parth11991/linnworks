@@ -15,7 +15,6 @@
   "Device": "ByApplication",
   "DeviceType": "ByApplication",
   "Server": "https://eu-ext.linnworks.net",
-  "ServerVersion2": "https://eu-api.linnworks.net/v2",
   "PushServer": "https://eu-push.linnworks.net",
   "Status": {
     "State": "AVAILABLE",
