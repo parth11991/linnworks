@@ -19,7 +19,7 @@ use Onfuro\Linnworks\Api\Listings;
 use Onfuro\Linnworks\Api\Dashboards;
 use Onfuro\Linnworks\Exceptions\LinnworksAuthenticationException;
 use GuzzleHttp\Client as GuzzleClient;
-use Onfuro\Linnworks\Api\OrdersV2;
+//use Onfuro\Linnworks\Api\OrdersV2;
 
 class Linnworks
 {
@@ -38,7 +38,7 @@ class Linnworks
     protected $server;
 
     /** @var string */
-    protected $serverV2;
+    //protected $serverV2;
 
     /** @var string */
     protected $response;
@@ -84,7 +84,7 @@ class Linnworks
 
         $this->server = $response['Server'] . '/api/';
 
-        $this->serverV2 = $response['ServerVersion2'];
+        //$this->serverV2 = $response['ServerVersion2'];
 
         $this->response = $response;
     }
@@ -109,10 +109,10 @@ class Linnworks
         return new Orders($this->client, $this->server, $this->bearer);
     }
 
-    public function ordersV2(): OrdersV2
-    {
-        return new OrdersV2($this->client, $this->serverV2, $this->bearer);
-    }
+    // public function ordersV2(): OrdersV2
+    // {
+    //     return new OrdersV2($this->client, $this->serverV2, $this->bearer);
+    // }
 
     public function locations(): Locations
     {
